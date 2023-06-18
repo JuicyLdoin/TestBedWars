@@ -1,0 +1,29 @@
+arena:
+  world: world
+  min_players: 2
+  max_players: 8
+  shops:
+    - world 100 100 105
+    - world 200 100 105
+  spawners:
+    1:
+      delay: 20 # in ticks
+      location: world 100 100 100
+      material: BRICK
+      name: "&6Бронза"
+    2:
+      delay: 20 # in ticks
+      location: world 200 100 100
+      material: BRICK
+      name: "&6Бронза"
+  teams:
+    red:
+      name: "Красные"
+      color: "c"
+      spawn_location: world 100 100 100
+      bed_location: world 105 100 100
+    blue:
+      name: "Синие"
+      color: "9"
+      spawn_location: world 200 100 100
+      bed_location: world 195 100 100

@@ -1,0 +1,25 @@
+database:
+  login: "root"
+  password: ""
+  host: "localhost"
+  database: "bedwars"
+
+waiting:
+  toStart: 60
+  lobby_location: world 0 100 0
+
+shop:
+  size: 9
+  items:
+    wool:
+      price_material: BRICK
+      price: 4
+      material: WOOL
+    shears:
+      price_material: BRICK
+      price: 12
+      material: SHEARS
+    sword:
+      price_material: BRICK
+      price: 8
+      material: WOOD_SWORD
