@@ -47,7 +47,7 @@ public final class ScoreboardManager {
                     }
                 }
             }
-        }.runTaskTimerAsynchronously(plugin, 0, 20).getTaskId();
+        }.runTaskTimer(plugin, 0, 20).getTaskId();
     }
 
     public final void stop() {
