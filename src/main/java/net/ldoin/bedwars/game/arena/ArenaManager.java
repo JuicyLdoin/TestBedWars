@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-public final class ArenaManager {
+public class ArenaManager {
 
     private final List<Arena> arenas;
     private Arena arena;
@@ -19,6 +19,7 @@ public final class ArenaManager {
     public ArenaManager(BedWarsPlugin plugin) {
         List<Arena> arenas = new ArrayList<>();
         File parent = new File(plugin.getDataFolder(), "arenas");
+
         if (!parent.exists()) {
             parent.mkdirs();
         } else {
@@ -36,14 +37,14 @@ public final class ArenaManager {
         this.arenas = Collections.unmodifiableList(arenas);
     }
 
-    public final Arena getArena() {
+    public Arena getArena() {
         if (arena == null) {
             loadRandomArena();
         }
         return arena;
     }
 
-    public final void loadRandomArena() {
+    public void loadRandomArena() {
         if (arenas.size() == 1) {
             arena = arenas.get(0);
             return;

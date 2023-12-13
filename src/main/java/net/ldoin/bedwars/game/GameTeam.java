@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public final class GameTeam {
+public class GameTeam {
 
     private final ArenaTeam arenaTeam;
     private final List<Player> players;
@@ -19,27 +19,27 @@ public final class GameTeam {
         hasBed = true;
     }
 
-    public final ArenaTeam getArenaTeam() {
+    public ArenaTeam getArenaTeam() {
         return arenaTeam;
     }
 
-    public final List<Player> getPlayers() {
+    public List<Player> getPlayers() {
         return Collections.unmodifiableList(players);
     }
 
-    public final boolean isHasBed() {
+    public boolean isHasBed() {
         return hasBed;
     }
 
-    public final void addPlayer(Player player) {
+    public void setHasBed(boolean hasBed) {
+        this.hasBed = hasBed;
+    }
+
+    public void addPlayer(Player player) {
         players.add(player);
     }
 
-    public final void removePlayer(Player player) {
+    public void removePlayer(Player player) {
         players.remove(player);
-    }
-
-    public final void setHasBed(boolean hasBed) {
-        this.hasBed = hasBed;
     }
 }

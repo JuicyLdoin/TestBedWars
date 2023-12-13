@@ -9,7 +9,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public final class ArenaMaterialSpawner {
+public class ArenaMaterialSpawner {
 
     private final int delay;
     private final Location location;
@@ -31,7 +31,7 @@ public final class ArenaMaterialSpawner {
         );
     }
 
-    public final void start(BedWarsPlugin plugin) {
+    public void start(BedWarsPlugin plugin) {
         taskId = new BukkitRunnable() {
             public void run() {
                 location.getWorld().dropItemNaturally(location, itemStack);
@@ -39,10 +39,10 @@ public final class ArenaMaterialSpawner {
         }.runTaskTimer(plugin, 0, delay).getTaskId();
     }
 
-    public final void stop() {
-        if (taskId == -1) {
+    public void stop() {
+        if (taskId == -1)
             return;
-        }
+
         Bukkit.getScheduler().cancelTask(taskId);
         taskId = -1;
     }

@@ -17,7 +17,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
 
-public final class Game {
+public class Game {
 
     private final BedWarsPlugin plugin;
     private final GameManager gameManager;
@@ -36,6 +36,7 @@ public final class Game {
         this.arena = arena;
         teams = new ArrayList<>();
         bedTeams = new HashMap<>();
+
         for (ArenaTeam arenaTeam : arena.getTeams()) {
             GameTeam gameTeam = new GameTeam(arenaTeam);
             bedTeams.put(arenaTeam.getFirstBedLocation(), gameTeam);
@@ -47,7 +48,7 @@ public final class Game {
         blockCache = new BlockCache();
     }
 
-    public final Arena getArena() {
+    public Arena getArena() {
         return arena;
     }
 
@@ -55,32 +56,33 @@ public final class Game {
         return Collections.unmodifiableList(teams);
     }
 
-    public final GameTeam getTeamByBedLocation(Location bedLocation) {
+    public GameTeam getTeamByBedLocation(Location bedLocation) {
         return bedTeams.get(bedLocation);
     }
 
-    public final GameTeam getPlayerTeam(Player player) {
+    public GameTeam getPlayerTeam(Player player) {
         return playerTeams.get(player);
     }
 
-    public final Shop getShop() {
+    public Shop getShop() {
         return shop;
     }
 
-    public final BlockCache getBlockCache() {
+    public BlockCache getBlockCache() {
         return blockCache;
     }
 
-    public final void removePlayer(Player player) {
+    public void removePlayer(Player player) {
         playerTeams.remove(player);
         if (playerTeams.isEmpty()) {
             end(new ArrayList<>());
         }
     }
 
-    public final boolean playerDeath(Player player) {
+    public boolean playerDeath(Player player) {
         UserData playerUser = userManager.getUser(player);
         playerUser.addDeath();
+
         Player killer = player.getKiller();
         if (killer != null) {
             UserData killerUser = userManager.getUser(killer);
@@ -89,11 +91,13 @@ public final class Game {
         } else {
             Bukkit.broadcastMessage(String.format("Игрок %s умер", player.getName()));
         }
+
         GameTeam team = getPlayerTeam(player);
         if (!team.isHasBed()) {
             playerUser.addLose();
             team.removePlayer(player);
             removePlayer(player);
+
             if (team.getPlayers().size() == 0) {
                 teams.remove(team);
                 Bukkit.broadcastMessage(String.format("§fКоманда %s §fбыла уничтожена", team.getArenaTeam().getDisplayName()));
@@ -101,8 +105,10 @@ public final class Game {
                     end(teams.get(0).getPlayers());
                 }
             }
+
             return true;
         }
+
         return false;
     }
 
@@ -124,17 +130,18 @@ public final class Game {
         }
     }
 
-    public final void start(List<Player> players) {
+    public void start(List<Player> players) {
         for (Location shopLocation : arena.getShopLocations()) {
             shop.spawn(shopLocation);
         }
         balancePlayers(players);
         spawnPlayers();
+
         arena.getSpawners().forEach(arenaMaterialSpawner -> arenaMaterialSpawner.start(plugin));
         gameManager.getScoreboardManager().start();
     }
 
-    public final void end(List<Player> winners) {
+    public void end(List<Player> winners) {
         if (!winners.isEmpty()) {
             for (Player player : winners) {
                 UserData userData = userManager.getUser(player);
@@ -142,10 +149,12 @@ public final class Game {
             }
         }
         arena.getSpawners().forEach(ArenaMaterialSpawner::stop);
+
         ScoreboardManager scoreboardManager = gameManager.getScoreboardManager();
         scoreboardManager.stop();
         scoreboardManager.clear();
         gameManager.setGameState(GameState.END);
+
         new BukkitRunnable() {
             public void run() {
                 Bukkit.getOnlinePlayers().forEach(player -> player.kickPlayer("Сервер перезапускается"));

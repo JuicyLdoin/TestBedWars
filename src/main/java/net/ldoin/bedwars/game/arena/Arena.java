@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public final class Arena {
+public class Arena {
 
     private final World world;
     private final List<ArenaMaterialSpawner> spawners;
@@ -37,6 +37,7 @@ public final class Arena {
                 new ArrayList<>(),
                 configurationSection.getInt("min_players"),
                 configurationSection.getInt("max_players"));
+
         ConfigurationSection spawnersSection = configurationSection.getConfigurationSection("spawners");
         for (String spawnerSection : spawnersSection.getKeys(false)) {
             spawners.add(new ArenaMaterialSpawner(spawnersSection.getConfigurationSection(spawnerSection)));
@@ -50,15 +51,15 @@ public final class Arena {
         }
     }
 
-    public final World getWorld() {
+    public World getWorld() {
         return world;
     }
 
-    public final List<ArenaMaterialSpawner> getSpawners() {
+    public List<ArenaMaterialSpawner> getSpawners() {
         return Collections.unmodifiableList(spawners);
     }
 
-    public final List<ArenaTeam> getTeams() {
+    public List<ArenaTeam> getTeams() {
         return Collections.unmodifiableList(teams);
     }
 
@@ -66,11 +67,11 @@ public final class Arena {
         return Collections.unmodifiableList(shopLocations);
     }
 
-    public final int getMinPlayers() {
+    public int getMinPlayers() {
         return minPlayers;
     }
 
-    public final int getMaxPlayers() {
+    public int getMaxPlayers() {
         return maxPlayers;
     }
 }

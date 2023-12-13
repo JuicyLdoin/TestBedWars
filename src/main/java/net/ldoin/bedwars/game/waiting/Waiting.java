@@ -15,15 +15,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public final class Waiting {
+public class Waiting {
 
     private final BedWarsPlugin plugin;
     private final GameManager gameManager;
     private final Game game;
     private final Arena arena;
     private final List<Player> players;
-    private int toStart;
     private final Location lobbyLocation;
+    private int toStart;
 
     public Waiting(BedWarsPlugin plugin, GameManager gameManager, Arena arena) {
         this.plugin = plugin;
@@ -37,19 +37,19 @@ public final class Waiting {
         lobbyLocation = LocationUtil.getLocation(config.getString("waiting.lobby_location"));
     }
 
-    public final List<Player> getPlayers() {
+    public List<Player> getPlayers() {
         return Collections.unmodifiableList(players);
     }
 
-    public final Location getLobbyLocation() {
+    public Location getLobbyLocation() {
         return lobbyLocation;
     }
 
-    public final void addPlayer(Player player) {
+    public void addPlayer(Player player) {
         players.add(player);
     }
 
-    public final void removePlayer(Player player) {
+    public void removePlayer(Player player) {
         players.remove(player);
     }
 
@@ -58,12 +58,12 @@ public final class Waiting {
         game.start(players);
     }
 
-    public final void startCount() {
+    public void startCount() {
         new BukkitRunnable() {
             public void run() {
-                if (players.size() < arena.getMinPlayers()) {
+                if (players.size() < arena.getMinPlayers())
                     return;
-                }
+
                 toStart--;
                 if (toStart == 0) {
                     startGame();

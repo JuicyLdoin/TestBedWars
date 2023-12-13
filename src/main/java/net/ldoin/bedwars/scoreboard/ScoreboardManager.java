@@ -14,7 +14,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public final class ScoreboardManager {
+public class ScoreboardManager {
 
     private final BedWarsPlugin plugin;
     private final GameManager gameManager;
@@ -28,13 +28,15 @@ public final class ScoreboardManager {
         task = -1;
     }
 
-    public final void start() {
+    public void start() {
         task = new BukkitRunnable() {
             public void run() {
                 List<String> lines = getLines();
+
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     PlayerConnection playerConnection = getConnection(player);
                     int index = 0;
+
                     for (String line : lines) {
                         if (displayed.contains(player)) {
                             sendScore(player, line, index);
@@ -43,6 +45,7 @@ public final class ScoreboardManager {
                             playerConnection.sendPacket(createObjectivePacket(player, 0, "bedboard"));
                             playerConnection.sendPacket(setObjectiveSlot(player));
                         }
+
                         index++;
                     }
                 }
@@ -50,19 +53,18 @@ public final class ScoreboardManager {
         }.runTaskTimer(plugin, 0, 20).getTaskId();
     }
 
-    public final void stop() {
-        if (task == -1) {
+    public void stop() {
+        if (task == -1)
             return;
-        }
         Bukkit.getScheduler().cancelTask(task);
     }
 
-    public final void clear(Player player) {
+    public void clear(Player player) {
         getConnection(player).sendPacket(createObjectivePacket(player, 1, null));
         displayed.remove(player);
     }
 
-    public final void clear() {
+    public void clear() {
         Bukkit.getOnlinePlayers().forEach(this::clear);
     }
 

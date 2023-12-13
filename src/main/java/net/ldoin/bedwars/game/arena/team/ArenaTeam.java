@@ -6,7 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.ConfigurationSection;
 
-public final class ArenaTeam {
+public class ArenaTeam {
 
     private final String name;
     private final String color;
@@ -19,16 +19,15 @@ public final class ArenaTeam {
         this.color = color;
         this.spawnLocation = spawnLocation;
         this.firstBedLocation = bedLocation;
+
         Block firstBedBlock = bedLocation.getBlock();
         Location secondBedLocation = null;
         for (int x = -1; x <= 1; x++) {
             for (int z = -1; z <= 1; z++) {
                 Block secondBedBlock = firstBedBlock.getRelative(x, 0, z);
-                if (!secondBedBlock.getLocation().equals(bedLocation)) {
-                    if (secondBedBlock.getType() == Material.BED_BLOCK) {
-                        secondBedLocation = secondBedBlock.getLocation();
-                        break;
-                    }
+                if (!secondBedBlock.getLocation().equals(bedLocation) && secondBedBlock.getType() == Material.BED_BLOCK) {
+                    secondBedLocation = secondBedBlock.getLocation();
+                    break;
                 }
             }
         }
@@ -44,7 +43,7 @@ public final class ArenaTeam {
         );
     }
 
-    public final String getDisplayName() {
+    public String getDisplayName() {
         return getPrefix() + name;
     }
 
@@ -52,15 +51,15 @@ public final class ArenaTeam {
         return "§" + color;
     }
 
-    public final Location getSpawnLocation() {
+    public Location getSpawnLocation() {
         return spawnLocation;
     }
 
-    public final Location getFirstBedLocation() {
+    public Location getFirstBedLocation() {
         return firstBedLocation;
     }
 
-    public final Location getSecondBedLocation() {
+    public Location getSecondBedLocation() {
         return secondBedLocation;
     }
 }

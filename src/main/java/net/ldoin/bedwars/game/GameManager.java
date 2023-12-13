@@ -4,7 +4,7 @@ import net.ldoin.bedwars.BedWarsPlugin;
 import net.ldoin.bedwars.game.waiting.Waiting;
 import net.ldoin.bedwars.scoreboard.ScoreboardManager;
 
-public final class GameManager {
+public class GameManager {
 
     private final Waiting waiting;
     private final ScoreboardManager scoreboardManager;
@@ -18,7 +18,7 @@ public final class GameManager {
         gameState = GameState.WAITING;
     }
 
-    public final Waiting getWaiting() {
+    public Waiting getWaiting() {
         return waiting;
     }
 
@@ -26,19 +26,19 @@ public final class GameManager {
         return scoreboardManager;
     }
 
-    public final GameState getGameState() {
+    public GameState getGameState() {
         return gameState;
     }
 
-    public final Game getGame() {
-        return game;
-    }
-
-    public final void setGameState(GameState gameState) {
+    public void setGameState(GameState gameState) {
         this.gameState = gameState;
     }
 
-    public final void setGame(Game game) {
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
         this.game = game;
     }
 }

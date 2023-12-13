@@ -16,7 +16,7 @@ public final class DatabaseConnection {
         executor = Executors.newFixedThreadPool(threads);
     }
 
-    public final void prepareStatementUpdate(String query, Object... objects) {
+    public void prepareStatementUpdate(String query, Object... objects) {
         executor.submit(() -> {
             try {
                 PreparedStatement statement = connection.prepareStatement(query);
@@ -30,7 +30,7 @@ public final class DatabaseConnection {
         });
     }
 
-    public final Future<ResultSet> prepareStatement(String query, Object... objects) {
+    public Future<ResultSet> prepareStatement(String query, Object... objects) {
         return executor.submit(() -> {
             try {
                 PreparedStatement statement = connection.prepareStatement(query);
@@ -44,9 +44,10 @@ public final class DatabaseConnection {
         });
     }
 
-    public final void close() {
+    public void close() {
         try {
             connection.close();
+            executor.shutdown();
         } catch (SQLException exception) {
             throw new RuntimeException(exception);
         }

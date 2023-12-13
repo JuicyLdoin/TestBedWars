@@ -27,51 +27,51 @@ public final class UserData {
         this.brokenBeds = brokenBeds;
     }
 
-    public final String getName() {
+    public String getName() {
         return name;
     }
 
-    public final int getWins() {
+    public int getWins() {
         return wins;
     }
 
-    public final int getLoses() {
+    public int getLoses() {
         return loses;
     }
 
-    public final int getGames() {
+    public int getGames() {
         return wins + loses;
     }
 
-    public final int getKills() {
+    public int getKills() {
         return kills;
     }
 
-    public final int getDeaths() {
+    public int getDeaths() {
         return deaths;
     }
 
-    public final int getBrokenBeds() {
+    public int getBrokenBeds() {
         return brokenBeds;
     }
 
-    public final void addWin() {
+    public void addWin() {
         wins++;
     }
 
-    public final void addLose() {
+    public void addLose() {
         loses++;
     }
 
-    public final void addKill() {
+    public void addKill() {
         kills++;
     }
 
-    public final void addDeath() {
+    public void addDeath() {
         deaths++;
     }
 
-    public final void addBrokenBed() {
+    public void addBrokenBed() {
         brokenBeds++;
     }
 }

@@ -16,15 +16,15 @@ public final class DatabaseData {
         this.database = database;
     }
 
-    public final String getUser() {
+    public String getUser() {
         return user;
     }
 
-    public final String getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public final String getDatabase() {
+    public String getDatabase() {
         return database;
     }
 
@@ -32,7 +32,7 @@ public final class DatabaseData {
         return "jdbc:mysql://" + host + ":" + port + "/" + database + "?autoReconnect=true&characterEncoding=utf8";
     }
 
-    public final String toString() {
+    public String toString() {
         return "DatabaseData{" +
                 "user='" + user + '\'' +
                 ", password='" + password + '\'' +

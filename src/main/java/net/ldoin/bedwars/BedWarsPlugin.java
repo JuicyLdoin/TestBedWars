@@ -19,8 +19,9 @@ public final class BedWarsPlugin extends JavaPlugin {
     private GameManager gameManager;
     private UserManager userManager;
 
-    public final void onEnable() {
+    public void onEnable() {
         Logger logger = getLogger();
+
         ConfigurationSection databaseSection = getConfig().getConfigurationSection("database");
         DatabaseData databaseData = new DatabaseData(
                 databaseSection.getString("login", "root"),
@@ -37,6 +38,7 @@ public final class BedWarsPlugin extends JavaPlugin {
             Bukkit.getServer().shutdown();
             return;
         }
+
         arenaManager = new ArenaManager(this);
         if (arenaManager.getArena() == null) {
             logger.log(Level.WARNING, "None of the arenas isn`t loaded");
@@ -45,18 +47,19 @@ public final class BedWarsPlugin extends JavaPlugin {
         }
         gameManager = new GameManager(this);
         userManager = new UserManager(logger, databaseConnection);
+
         new ListenerManager(this);
     }
 
-    public final GameManager getGameManager() {
+    public GameManager getGameManager() {
         return gameManager;
     }
 
-    public final ArenaManager getArenaManager() {
+    public ArenaManager getArenaManager() {
         return arenaManager;
     }
 
-    public final UserManager getUserManager() {
+    public UserManager getUserManager() {
         return userManager;
     }
 }

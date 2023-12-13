@@ -26,14 +26,15 @@ public final class UserManager {
         users = new HashMap<>();
     }
 
-    public final UserData getUser(Player player) {
+    public UserData getUser(Player player) {
         UUID uuid = player.getUniqueId();
-        if (!users.containsKey(uuid))
+        if (!users.containsKey(uuid)) {
             return loadUser(uuid, player.getName());
+        }
         return users.get(uuid);
     }
 
-    public final UserData loadUser(UUID uuid, String name) {
+    public UserData loadUser(UUID uuid, String name) {
         UserData userData = new UserData(name);
         try {
             ResultSet resultSet = databaseConnection.prepareStatement("SELECT * FROM `bedwars` WHERE uuid=?", uuid.toString())
@@ -64,7 +65,7 @@ public final class UserManager {
                 uuid.toString(), name, 0, 0, 0, 0, 0);
     }
 
-    public final void saveUser(Player player) {
+    public void saveUser(Player player) {
         UserData userData = getUser(player);
         databaseConnection.prepareStatementUpdate("UPDATE `bedwars` SET wins=?, loses=?, kills=?, deaths=?, brokenBeds=? WHERE uuid=?",
                 userData.getWins(), userData.getLoses(),
@@ -74,7 +75,7 @@ public final class UserManager {
         );
     }
 
-    public final void unloadUser(Player player) {
+    public void unloadUser(Player player) {
         saveUser(player);
         users.remove(player.getUniqueId());
     }
